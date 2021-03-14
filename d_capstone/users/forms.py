@@ -14,11 +14,18 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-	email = forms.EmailField()
+	email = forms.EmailField(label="email")
+#	usrname = forms.CharField(label="username")
 
 	class Meta:
 		model = User
-		fields = ['username', 'email']
+		fields = ["username", "email"]
+'''
+	widgets = {
+	"username":forms.TextInput(attrs={'class':'form-group'}),
+	"email":forms.EmailInput(attrs={'class':'form-control'})
+	}
+'''
 
 
 class ProfileUpdateForm(forms.ModelForm):   # Strictly for updating profile image

@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -12,6 +14,7 @@ def login(request):
 def logout(request):
 	return render(request, 'users/logout.html')
 
+#@csrf_exempt
 @login_required
 def profile(request):
 
@@ -36,6 +39,9 @@ def profile(request):
 	}
 	return render(request, 'users/profile.html', context)
 
+
+
+
 def register(request):
 #	form = UserCreationForm()
 #	return render(request, 'users/register.html', {'form':form})
@@ -54,7 +60,9 @@ def register(request):
 def forgot_password(request):
 	return render(request, 'users/forgot_password.html')
 
-
+def user_list(request):
+	users = User.objects.all()
+	return render(request, 'users/user_list.html', {'users':users})
 
 
 
