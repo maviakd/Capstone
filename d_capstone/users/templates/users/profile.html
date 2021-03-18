@@ -1,6 +1,6 @@
 {% extends "webapp/base.html" %}
 {% load crispy_forms_tags %}
-
+{% load widget_tweaks %}
 {% block content %}
 
         <div class="container-fluid">
@@ -15,8 +15,20 @@
                     <div class="row mb-3">
                         <div class="col-lg-4">
                             <div class="card mb-3">
-                                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="{{user.profile.image.url}}" width="160" height="160">
-                                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Change Photo</button></div>
+                                <div class="card-body text-center shadow"><img src="{{user.profile.image.url}}">
+
+
+					
+				  <!--form method="POST" enctype="multipart/form-data">
+					{% csrf_token %}
+					{% for item in p_form %}
+					
+                                    <div class="mb-3">{% render_field item %}</div>
+					{% endfor %}
+					<div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Update</button></div>
+				  </form-->
+
+
                                 </div>
                             </div>
                             <div class="card shadow mb-4">
@@ -82,28 +94,40 @@
                                 <div class="col">
                                     <div class="card shadow mb-3">
                                         <div class="card-header py-3">
-                                            <p class="text-primary m-0 font-weight-bold">User Settings</p>
+                                            <p class="text-primary m-0 font-weight-bold">EXAMPLE 1</p>
                                         </div>
                                         <div class="card-body">
 
 
 
 
-					    <form  method="POST" enctype="multipart/form-data">
+
+
+
+
+
+					    <form  method="POST" enctype="multipart/form-data" >
                                                 <div class="form-row">
+							<div class="col">
 
-
-					<div class="col">
-                                        <div class="form-group"><label for="USER-NAME"><strong>Username</strong></label><input class="form-control" type="t>                                                    
-					</div>
-
-							{% csrf_token %}
-							{{u_form|crispy}}
+							{% csrf_token %}							
+							{% for item in u_form %}
+<div class="form-group"><strong>{{item.name}}</strong> {% render_field item class="form-control" type="text" id="address" name="{{item.name}}"%}</div>
+							{% endfor %}
 							{{p_form|crispy}}
-							<div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Update</button></div>
 
+							<div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Update</button></div>
                                                 </div>    
                                             </form>
+					</div>
+				     </div>
+				    </div>
+                                  </div>
+
+
+
+
+
 
 
 
@@ -129,19 +153,15 @@
                                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
                                             </form-->
 
-
-
-                                        </div>
-                                    </div>
                                     <div class="card shadow">
                                         <div class="card-header py-3">
-                                            <p class="text-primary m-0 font-weight-bold">FORM SAVE</p>
+                                            <p class="text-primary m-0 font-weight-bold">EXAMPLE 2</p>
                                         </div>
                                         <div class="card-body">
 
 
 
-					    <form  method="POST" enctype="multipart/form-data">
+					    <!--form  method="POST" enctype="multipart/form-data">
                                                 <div class="form-row">
                                                         {% csrf_token %}
                                                         {{u_form|crispy}}
@@ -149,10 +169,10 @@
                                                         <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Update</button></div>
 
                                                 </div>
-                                            </form>
+                                            </form-->
 
-                                            <!--form method="POST">
-						{% csrf_token %}
+                                            <form method="POST">
+						
                                                 <div class="form-group"><label for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" placeholder="Sunset Blvd, 38" name="address"></div>
                                                 <div class="form-row">
                                                     <div class="col">
@@ -163,13 +183,15 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button></div>
-                                            </form-->
+
+                                            </form>
 
 
 
                                         </div>
                                     </div>
                                 </div>
+				</div>
                             </div>
                         </div>
                     </div>

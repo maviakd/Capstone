@@ -1,0 +1,66 @@
+{% extends "webapp/base.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+                                <div class="row">
+                                <div class="col">
+                                    <div class="card shadow mb-3">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 font-weight-bold">EXAMPLE 1</p>
+                                        </div>
+                                        <div class="card-body">
+
+
+                                                <form  method="POST" enctype="multipart/form-data" id="files">
+
+                                                        {% csrf_token %}
+                                                        {% for item in f_form %}
+                                                        {{ item}}
+                                                        {% endfor %}
+                                          <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Upload</button></div>
+                                            </form>
+                                          </div>
+                                     </div>
+                                    </div>
+
+                                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>username</th>
+                                            <th>ID</th>
+                                            <th>Data Posted</th>
+					    <th>Delete</th>
+                                            </tr>
+                                    </thead>
+
+					  {% for item in m_files %}
+
+                                            <tr>
+                     <td><img class="rounded-circle mr-2" width="30" height="30" src="{{item.doc.url}}"><a href="{{item.doc.url}}">{{item}}</a></td>
+                                            <td>{% render_field item.id %}</td>
+                                            <td>{% render_field item.date_posted %}</td>
+					    <form method="GET" enctype="multipart/form-data" action="{% url 'file_delete'%}">{% csrf_token %}
+                                            <td><div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Delete</button></div></td>
+                                            </tr>
+                                        </form>
+                                            </tr>
+                                        {% endfor %}
+
+                                </table>
+                                </div>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+

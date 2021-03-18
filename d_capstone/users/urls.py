@@ -13,6 +13,9 @@ urlpatterns = [
 	path('profile/', user_views.profile, name='users-profile'),
 	path('register/', user_views.register, name='users-register'),
         path('forgot_password/', user_views.forgot_password, name='users-forgot_password'),
+	path('user_list/', user_views.user_list, name='users-user_list'),
+	path('files/', user_views.files, name='users-files'),
+	path('file_delete/', user_views.file_delete, name='file_delete'),
 
 
 ]

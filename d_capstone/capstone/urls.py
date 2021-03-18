@@ -22,6 +22,7 @@ urlpatterns = [
 	path('admin/', admin.site.urls),
 	path('', include('webapp.urls'), name='webapp'),
 	path('', include('users.urls'), name='users'),
+	#path('', include('fileshare.urls'), name='fileshare'),
 	#path('dashboard/', include('webapp.urls'), name='dashboard'),
 
 	#path('login/', include('users.urls'), name='login'),

@@ -3,6 +3,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
+from .forms import Files as F_files
+from .models import Files as M_files
 
 # Create your views here.
 
@@ -12,6 +16,7 @@ def login(request):
 def logout(request):
 	return render(request, 'users/logout.html')
 
+#@csrf_exempt
 @login_required
 def profile(request):
 
@@ -36,6 +41,9 @@ def profile(request):
 	}
 	return render(request, 'users/profile.html', context)
 
+
+
+
 def register(request):
 #	form = UserCreationForm()
 #	return render(request, 'users/register.html', {'form':form})
@@ -54,10 +62,38 @@ def register(request):
 def forgot_password(request):
 	return render(request, 'users/forgot_password.html')
 
+def user_list(request):
+	users = User.objects.all()
+	return render(request, 'users/user_list.html', {'users':users})
 
 
+def files(request):
+	if request.method == 'POST':
+
+		f_form = F_files(request.POST,request.FILES)
+		m_files = M_files.objects.all()
+		if f_form.is_valid():
+			f_form.save()
+			messages.success(request, f'Your profile has been uploaded')
+	else:
+		f_form = F_files(request.POST,request.FILES)
+		m_files = M_files.objects.all()
+
+	context = {'f_form':f_form, 'm_files':m_files}
+	return render(request, 'users/files.html', context)
 
 
+def file_delete(request):
+	if request.method == 'POST':
+		#item = request.GET.get("a")
+		#item.delete()
+		messages.success(request, f'Your profile has been updated')
+	else:
+		item = request.GET
+		messages.success(request, f'Something happened')
+	#print(f"-------------------------------------------------------------------------------------{item}")
+	#return render(request, 'users/files.html')
+	return files(request)
 
 
 

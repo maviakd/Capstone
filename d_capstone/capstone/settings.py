@@ -33,6 +33,8 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     'webapp.apps.WebappConfig',
     'users.apps.UsersConfig',
+#    'fileshare.apps.FileshareConfig',
+    'widget_tweaks',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
