@@ -1,0 +1,29 @@
+{% extends "fileshare/base.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+<div class="container-fluid">
+<h3 class="text-dark mb-4">Profile</h3>
+<div class="row mb-3">
+<div class="col-lg-4">
+<div class="card mb-3">
+<div class="card-body text-center shadow">
+
+
+<form method="POST" enctype="multipart/form-data">
+<p>Are You sure you want to add User |{{user}}| to Group |{{group}}|?</p>
+{% csrf_token %}
+<button class="btn btn-outline-danger btn-sm" type="submit">Add</button></div>
+<a class='btn btn-outline-secondary' href="{% url 'group_list' %}" >Cancel</a>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
