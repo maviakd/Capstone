@@ -1,0 +1,137 @@
+{% extends "fileshare/base.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+
+
+				<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+
+                                <table class="table my-0" id="dataTable">
+                                    <thead>Users Inside of Group |UIG|
+                                        <tr>
+                                            <th>username</th>
+                                            <th>ID</th>
+					    <th>Action</th>
+                                         </tr>
+                                    </thead>
+                                        {% for item in UIG %}
+                                            <tr>
+                                            <td><img class="rounded-circle mr-2" width="30" height="30" src="{{item.profile.image.url}}"><a href="{% url 'user_detail' item.id %}">{{item}}</a></td>
+                                            <td>{{item.id}}</td>
+					    <th>
+{% if item != request.user %}
+<a method="POST" class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'group_remove_user' group.pk item.id %}">REMOVE</a>
+{% else %}
+<p2>SELF</p2>
+{% endif %}					    </th>
+                                            </tr>
+                                        {% endfor %}
+                                </table>
+                                </div>
+
+
+				<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+
+                                <table class="table my-0" id="dataTable">
+                                    <thead>Users Outside of Group |UOG| 
+                                        <tr>
+                                            <th>username</th>
+                                            <th>ID</th>
+                                            <th>Action</th>
+                                         </tr>
+                                    </thead>
+                                        {% for item in UOG %}
+                                            <tr>
+                                            <td><img class="rounded-circle mr-2" width="30" height="30" src="{{item.profile.image.url}}"><a href="{% url 'user_detail' item.id %}">{{item}}</a></td>
+                                            <td>{{item.id}}</td>
+                                            <th>
+<a method="POST" class="btn btn-primary btn-sm" href="{% url 'group_add_user' group.pk item.id %}">ADD</a>
+                                            </th>
+                                            </tr>
+                                        {% endfor %}
+                                </table>
+                                </div>
+
+
+				<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+
+                                <table class="table my-0" id="dataTable">
+                                    <thead>Current Group Permissions |PIG|
+                                        <tr>
+                                            <th>username</th>
+                                            <th>ID</th>
+                                            <th>Action</th>
+                                         </tr>
+                                    </thead>
+                                        {% for item in PIG %}
+                                            <tr>
+                                            <td><p>{{item}}</p></td>
+                                            <td>{{item.id}}</td>
+                                            <th>
+<a method="POST" class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'group_remove_permission' group.pk item.id %}">REMOVE</a>
+                                            </th>
+                                            </tr>
+                                        {% endfor %}
+                                </table>
+                                </div>
+
+
+				<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+
+                                <table class="table my-0" id="dataTable">
+                                    <thead>Add Group Permissions |POG|
+                                        <tr>
+                                            <th>username</th>
+                                            <th>ID</th>
+                                            <th>Action</th>
+                                         </tr>
+                                    </thead>
+                                        {% for item in POG %}
+                                            <tr>
+                                            <td>{{item}}</td>
+                                            <td>{{item.id}}</td>
+                                            <th>
+<a method="POST" class="btn btn-primary btn-sm" href="{% url 'group_add_permission' group.pk item.id %}">ADD</a>
+                                            </th>
+                                            </tr>
+                                        {% endfor %}
+                                </table>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+				{% if is_paginated %}
+
+      				{% if page_obj.has_previous %}
+        				<a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        				<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      				{% endif %}
+
+      				{% for num in page_obj.paginator.page_range %}
+        			{% if page_obj.number == num %}
+          				<a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        			{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          				<a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        			{% endif %}
+      				{% endfor %}
+
+      				{% if page_obj.has_next %}
+        				<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        				<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      				{% endif %}
+
+    				{% endif %}
+
+
+
+{% endblock %}
+

@@ -1,0 +1,18 @@
+{% extends "fileshare/secondbase.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block content %}
+
+		<p>WELCOME TO REGISTER</p>
+
+	<form  method="POST">
+	{% csrf_token %}
+	{{form|crispy}}
+	<button class="btn btn-primary btn-sm" type="submit">Register</button></div>
+	</form>
+
+	<div class="text-center"><a class="small" href="{% url 'two_factor:login' %}">Already have an account account?</a></div>
+	<div class="text-center"><a class="small" href="{% url 'password_reset' %}">Forgot Password?</a></div>
+
+
+{% endblock %}

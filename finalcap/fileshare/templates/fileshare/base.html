@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Dashboard - SNS</title>
+    <link rel="stylesheet" href="{% static 'fileshare/assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Candal">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courier+Prime">
+    <link rel="stylesheet" href="{% static 'fileshare/assets/fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fileshare/assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fileshare/assets/fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fileshare/assets/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fileshare/assets/css/Login-Form-Clean.css' %}">
+    <link rel="stylesheet" href="{% static 'fileshare/assets/css/Login-Form-Dark.css' %}">
+    <link rel="stylesheet" href="{% static 'fileshare/assets/css/untitled.css' %}">
+</head>
+
+<body id="page-top">
+
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: #03002e;">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"></div>
+                    <div class="sidebar-brand-text mx-3"><span>S.N.S</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'fileshare_dashboard' %}"><i class="fas fa-tachometer-alt"></i><span><strong>Dashboard</strong></span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user"></i><span><strong>Profile</strong></span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'group_list' %}"><i class="fa fa-group"></i><span><strong>Groups</strong></span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'files' %}"><i class="fa fa-folder-open"></i><span><strong>Files</strong><br></span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'user_list' %}"><i class="fa fa-trash"></i><span><strong>Users</strong><br></span></a></li>
+		    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-group"></i><span><strong>Logout</strong></span></a></li>
+{% if messages %}
+{% for message in messages %}
+<li class="nav-item"><i class="fas fa-tachometer-alt"></i><span><strong>{{message}}</strong></span></li>
+{% endfor %}	    
+{% endif %}
+
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+<body style="background: #001540;">
+
+
+{% block content %}
+{% endblock %}
+
+    <script src="{% static 'fileshare/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'fileshare/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="{% static 'fileshare/assets/js/theme.js' %}"></script>
+</body>
+
+</html>

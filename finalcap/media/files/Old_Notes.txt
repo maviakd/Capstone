@@ -1,0 +1,26 @@
+python3 manage.py make.migrations
+python3 manage.py sqlmigrate blog 0001
+python3 manage.py migrate
+
+from blog.models import Post
+from django.contrib.auth.models import User
+User.objects.all()
+User.objects.first()
+User.objects.filter(username='')
+User.objects.filter(username='').first()
+user = User.objects.filter(username='').first()
+
+user.id
+user.pk
+
+
+post_1 = Post(title="Blog 1", content='First Post Content!', author=user)
+post_1.save()
+Post.objects.all()
+post_2 = Post(title = "Blog 2", content = "Second Post Content", author_id = user.id)
+
+
+user.post_set.create(title='Blog 3', content = "Third post content")
+
+
+

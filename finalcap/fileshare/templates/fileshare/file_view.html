@@ -1,0 +1,89 @@
+{% extends "fileshare/base.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block content %}
+
+                                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>File</th>
+                                            <th>Author</th>
+                                            <th>ID</th>
+					    <th>Action</th>
+                                            <th>Method</th>
+                                            </tr>
+                                    </thead>
+                                          
+                                            <tr>
+                     <td><img class="rounded-circle mr-2" width="30" height="30" src="{{item.thumbnail.url}}"><a href="{{item.doc.url}}">
+						{% if item.encryption != 'None' %}
+							 -- {{item}} -- 
+						{% else %}
+							{{item}}
+						{% endif %}
+							</a></td>
+                                            <td>{% render_field item.author %}</td>
+                                            <!--td>{#{item.date_posted | date:"F d, Y"}}</td-->
+						<td>{{item.pk}}</td>
+						<td>
+						{% if item.author == user %}
+                                                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'file_update' item.id %}">Update</a>
+                                                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'file_delete' item.id %}">Delete</a>
+						{% else %}
+						<a class="btn btn-primary btn-sm mt-2 mb-2" href="{{item.doc.url}}">View Content</a>
+                                                {% endif %}
+						</td>
+						<td>
+
+						{{item.encryption}}
+
+						</td>
+                                 		</tr>               
+				</table>
+				</div>
+	{% if is_paginated %}
+
+      	{% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+      {% endif %}
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

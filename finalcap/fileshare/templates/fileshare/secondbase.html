@@ -1,0 +1,49 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    {% if title %}
+    <title>title</title>
+    {% else %}
+    <title>SNS</title>
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'fileshare/assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Candal">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courier+Prime">
+    <link rel="stylesheet" href="{% static 'fileshare/assets/fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fileshare/assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fileshare/assets/fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fileshare/assets/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fileshare/assets/css/Login-Form-Clean.css' %}">
+    <link rel="stylesheet" href="{% static 'fileshare/assets/css/Login-Form-Dark.css' %}">
+    <link rel="stylesheet" href="{% static 'fileshare/assets/css/untitled.css' %}">
+</head>
+
+<body class="bg-gradient-primary" style="background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;), #252525;">
+    <section class="login-dark" style="background: url(&quot;{% static 'fileshare/assets/img/giphy.gif' %}&quot;);background-size: cover;">
+        <form method="post" style="width: 500px;background: rgba(223,235,251,0.68);">
+
+{% if messages %}
+{% for message in messages %}
+<h2 class="sr-only">messages</h2>
+{% endfor %}
+{% endif %}
+
+            <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+		{% block content %}{% endblock %}
+        </form-->
+    </section>
+    <script src="{% static 'fileshare/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'fileshare/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'fileshare/https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js' %|"></script>
+    <script src="{% static 'fileshare/assets/js/theme.js' %}"></script>
+</body>
+
+</html>

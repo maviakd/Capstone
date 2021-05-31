@@ -1,0 +1,15 @@
+{% extends "fileshare/secondbase.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+                <form  method="POST">
+	<!--	<li class="nav-item">--> <button class="btn btn-primary btn-block"style="margin-top: 12px;">
+			 <a class="nav-link" href="{% url 'two_factor:login' %}"><i class="fa fa-user-circle" style="margin-right: 5px;"></i><span>Login</span></a>
+				 </button><!--</li>-->
+
+                <div class="text-center"><a class="small" href="{% url 'register' %}">Don't have an account?</a></div>
+                <div class="text-center"><a class="small" href="{% url 'password_reset' %}">Forgot Password?</a></div>
+
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends "fileshare/base.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block content %}
+
+                <div class="container-fluid">
+              
+			<h3 class="mb-4" style="color: #c7eaf2;font-family: Candal, sans-serif;"><strong>All Available Files</strong></h3>
+                        
+                    <div class="card shadow" style="background: rgba(255,255,255,0);border: 2px solid rgb(255,255,255) ;">
+                        <div class="card-header py-3" style="background: rgba(139,189,217,0.75);">
+
+                         
+<p class="m-0 font-weight-bold" style="color: #161d20; text-align: center;">Total Owned Files - {{total_files}}</p>
+ 
+                        </div>
+
+<a class="btn btn-primary btn-sm" style="height: 40px" href="{% url 'file_new' %}">Add File</a>
+
+                        <div class="card-body" style="background: rgba(228,240,246,0.75);">              
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>File</th>
+					    <th>Author</th>
+					    <th>Date Created</th>
+					    <th>Encryption Method</th>
+					    <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+{% for item in files %}
+{% if item.author == user %}
+                                        <tr>
+                                            <td><img class="rounded-circle mr-2" width="50" height="50" src="{{item.thumbnail.url}}">{{item}}</td>
+					    <td>{{item.author}}</td>
+					    <td>{{item.date_posted}}</td> 
+					    <td>{{item.encryption}}</td>
+					    <td>
+
+					
+{% if item.author == request.user %}
+{% if item.encryption == 'None' %}
+<a class="btn btn-primary btn-sm" href="{% url 'file_auth' item.id %}">View</a>
+{% else %}
+<a class="btn btn-primary btn-sm" href="{% url 'file_auth' item.id %}">Decrypt</a>
+{% endif %}
+						<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'file_update' item.id %}">Update</a>
+						<a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'file_delete' item.id%}">Delete</a>
+{% endif %}
+					    </td>
+                                        </tr>
+{% endif %}
+{% endfor %}
+
+                                    </tbody>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+
+
+
+
+
+
+                <div class="container-fluid">
+
+                        <h3 class="mb-4" style="color: #c7eaf2;font-family: Candal, sans-serif;"><strong>All Given Files</strong></h3>
+
+                    <div class="card shadow" style="background: rgba(255,255,255,0);border: 2px solid rgb(255,255,255) ;">
+                        <div class="card-header py-3" style="background: rgba(139,189,217,0.75);">
+
+
+<p class="m-0 font-weight-bold" style="color: #161d20; text-align: center;">Total Given Files - {{total_given_files}}</p>
+
+                        </div>
+
+<!--a class="btn btn-primary btn-sm" style="height: 40px" href="{% url 'file_new' %}">Add File</a-->
+
+                        <div class="card-body" style="background: rgba(228,240,246,0.75);">
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>File</th>
+                                            <th>author</th>
+                                            <th>From</th>
+                                            <th>Encryption Method</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+{% for item in  given_files%}
+                                        <tr>
+
+                                            <td><img class="rounded-circle mr-2" width="30" height="30" src="{{item.thumbnail.url}}">{{item}}</td>
+                                            <td>{{item.author}}</td>
+
+						<td>{% for g in item.belongsto.all %}
+                                            	{{g}}
+						{% endfor %}</td>
+
+					    <td>{{item.encryption}}</td>
+					
+					    <td>	
+
+							{% if item in can_view %}
+							{% if item.encryption == 'None' %}
+							<a class="btn btn-primary btn-sm" href="{% url 'file_auth' item.id %}">View</a>
+							{% else %}
+							<a class="btn btn-primary btn-sm" href="{% url 'file_auth' item.id %}">Decrypt</a>
+							{% endif %}
+							{% endif %}
+							{% if item in can_remove %}
+							<a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'file_delete' item.id%}">Delete</a>
+							{% endif %}
+
+					    </td>
+                                        </tr>
+{% endfor %}
+
+                                    </tbody>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+
+
+{% endblock %}

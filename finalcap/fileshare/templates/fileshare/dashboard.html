@@ -1,0 +1,133 @@
+{% extends "fileshare/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block content %}
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content" style="background: #daf0ff;">
+                <div class="carousel slide" data-ride="carousel" id="carousel-1">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active"><img class="w-100 d-block" id="carimg" src="{% static 'fileshare/assets/img/giphy.gif' %}" alt="Slide Image">
+                            <div class=".carousel-caption"></div>
+                            <div class="carousel-caption">
+                                <h1 style="color: #daf0ff;border-style: none;box-shadow: 0px 0px;background: rgba(69,182,254,0.27);margin-top: -357px;margin-bottom: 0px;font-size: 58px;padding: 10px;padding-top: 10px;padding-bottom: 10px;"><strong>Welcome to Simple Network Service</strong></h1>
+                                <p style="color: #daf0ff;background: rgba(69,182,254,0.21);font-size: 25px;">Your one stop shop for all your file sharing and VPN needs</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item"><img class="w-100 d-block" id="carimg" src="{% static 'fileshare/assets/img/secure.gif' %}" alt="Slide Image">
+                            <div class="carousel-caption" id="caption2">
+                                <h3 style="color: #ffffff;font-size: 50px;font-family: Nunito, sans-serif;background: rgba(119,231,255,0.27);"><strong>Reliable, Fast, and Secure</strong></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-1" data-slide-to="1"></li>
+                    </ol>
+                </div>
+
+<div id="Dash_Button" style="text-align: center;">
+    <div class="col" style="padding-right: 0px;padding-left: 0px;"><button class="btn btn-primary btn-block" type="button" style="background: rgb(11,11,11);color: #00e067;font-family: 'Courier Prime', monospace;height: 53px;font-size: 18px;border: 1px solid rgb(0,0,0);border-radius: 0px;"><strong><a request="get" href= "{% url 'VPN' %}" >Email VPN Access Information</a></strong></button></div>
+</div>
+
+                <div id="Info_Holder" style="padding: 5px;margin: 5px;">
+                    <div class="container" style="padding-left: 10px;">
+                        <h1 style="color: rgb(78,115,223);padding-left: 0px;font-family: Candal, sans-serif;"><strong>Dashboard</strong></h1>
+                    </div>
+                </div>
+
+
+
+
+<div id="Dash_Info" style="padding: 15px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3" style="background: #8bbdd9c0;">
+                        <h6 class="font-weight-bold m-0" style="color: #03254c;">Total Owned Files</h6>
+                    </div>
+                    <div class="card-body" style="background: rgba(228,240,246,0.75);">
+                        <h1 style="font-family: <!--'Alfa Slab One', serif;-->Candal, sans-serif;font-size: 100px;color: #00001a;margin-bottom: 0px;text-align: center; ">{{request.user.profile.total_owned_files}}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3" style="background: #8bbdd9c0;">
+                        <h6 class="font-weight-bold m-0" style="color: #03254c;">Total Given Files</h6>
+                    </div>
+                    <div class="card-body" style="background: rgba(228,240,246,0.75);">
+                        <h1 style="font-family: <!--'Alfa Slab One', serif;-->Candal, sans-serif;font-size: 100px;color: #00001a;margin-bottom: 0px;text-align: center; ">{{request.user.profile.total_given_files}}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3" style="background: #8bbdd9c0;">
+                        <h6 class="font-weight-bold m-0" style="color: #03254c;">Total Groups</h6>
+                    </div>
+                    <div class="card-body" style="background: rgba(228,240,246,0.75);">
+                        <h1 style="font-family: <!--'Alfa Slab One', serif;-->Candal, sans-serif;font-size: 100px;color: #00001a;margin-bottom: 0px;text-align: center; ">{{request.user.profile.total_groups}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3" style="background: #8bbdd9c0;">
+                        <h6 class="font-weight-bold m-0" style="color: #03254c;">Total Uploaded files</h6>
+                    </div>
+                    <div class="card-body" style="background: rgba(228,240,246,0.75);">
+                        <h1 style="font-family: <!--'Alfa Slab One', serif;--> Candal, sans-serif;font-size: 100px;color: #00001a;margin-bottom: 0px;text-align: center; ">{{request.user.profile.total_uploaded_files}}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3" style="background: #8bbdd9c0;">
+                        <h6 class="font-weight-bold m-0" style="color: #03254c;">Total Downloaded files</h6>
+                    </div>
+                    <div class="card-body" style="background: rgba(228,240,246,0.75);">
+                        <h1 style="font-family: <!--'Alfa Slab One', serif;--> Candal, sans-serif;font-size: 100px;color: #00001a;margin-bottom: 0px;text-align: center; ">{{request.user.profile.total_download_files}}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3" style="background: #8bbdd9c0;">
+                        <h6 class="font-weight-bold m-0" style="color: #03254c;">Total Space</h6>
+<a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'reset'%}">RESET</a>
+                    </div>
+                    <div class="card-body" style="background: rgba(228,240,246,0.75);">
+                        <h1 style="font-family: <!--'Alfa Slab One', serif;-->Candal, sans-serif;font-size: 50px;color: #00001a;margin-bottom: 0px;text-align: center; ">{{request.user.profile.space}} Bytes</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+{% endblock %}
